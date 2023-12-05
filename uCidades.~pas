@@ -24,6 +24,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure AvisoCadastroIncompleto;
     procedure CadastrarCidade;
+    procedure ExcluirCidade;
+    procedure btnVoltarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +53,7 @@ begin
       LCadastroIncompleto := false;
 end;
 
-procedure TfrmCidades.CadastrarCidade;
+procedure TfrmCidades.CadastrarCidade; 
 begin
   try
     dmConexao.CadastrarCidade(edCidade.Text, edUF.Text);
@@ -58,6 +61,27 @@ begin
   except
     on E: Exception do
       MessageDlg('Erro ao cadastrar cidade: ' + E.Message, mtError, [mbOK], 0);
+  end;
+end;
+
+procedure TfrmCidades.ExcluirCidade;
+var
+  CidadeID: Integer;
+begin
+  try
+    if not dmConexao.cdsCIDADES.IsEmpty then
+    begin
+      CidadeID := dmConexao.cdsCIDADES.FieldByName('CIDADE_ID').AsInteger;
+      dmConexao.ExcluirCidade(CidadeID);
+      MessageDlg('Cidade excluída com sucesso!', mtInformation, [mbOK], 0);
+    end
+    else
+    begin
+      MessageDlg('Nenhuma cidade selecionada para exclusão.', mtWarning, [mbOK], 0);
+    end;
+  except
+    on E: Exception do
+      MessageDlg('Erro ao excluir cidade: ' + E.Message, mtError, [mbOK], 0);
   end;
 end;
 
@@ -72,6 +96,8 @@ begin
    else
    begin
       CadastrarCidade;
+      edCidade.Text := EmptyStr;
+      edUF.Text     := EmptyStr;
    end;
 end;
 
@@ -85,6 +111,22 @@ end;
 procedure TfrmCidades.FormShow(Sender: TObject);
 begin
    edCidade.SetFocus;
+end;
+procedure TfrmCidades.btnVoltarClick(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TfrmCidades.btnExcluirClick(Sender: TObject);
+begin
+   if (dmConexao.cdsCIDADES.RecordCount > 0) then
+   begin
+      ExcluirCidade;
+   end
+   else
+   begin
+      MessageDlg('Nenhum registro encontrado!', mtInformation, [mbOk], 0);
+   end;
 end;
 end.
 

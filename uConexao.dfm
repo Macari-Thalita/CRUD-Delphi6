@@ -30,11 +30,26 @@ object dmConexao: TdmConexao
     Top = 16
   end
   object dstCIDADES: TSQLDataSet
+    NoMetadata = True
     SQLConnection = Conexao
-    DataSource = dsCIDADES
+    CommandText = 'SELECT CIDADE_ID, CIDADE_NOME, CIDADE_UF FROM CIDADES'
     Params = <>
     Left = 344
     Top = 16
+    object dstCIDADESCIDADE_ID: TIntegerField
+      FieldName = 'CIDADE_ID'
+      Required = True
+    end
+    object dstCIDADESCIDADE_NOME: TStringField
+      FieldName = 'CIDADE_NOME'
+      Required = True
+      Size = 50
+    end
+    object dstCIDADESCIDADE_UF: TStringField
+      FieldName = 'CIDADE_UF'
+      Required = True
+      Size = 2
+    end
   end
   object dspCIDADES: TDataSetProvider
     DataSet = dstCIDADES
@@ -43,11 +58,26 @@ object dmConexao: TdmConexao
     Top = 71
   end
   object cdsCIDADES: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCIDADES'
     Left = 344
     Top = 125
+    object cdsCIDADESCIDADE_ID: TIntegerField
+      FieldName = 'CIDADE_ID'
+      Required = True
+    end
+    object cdsCIDADESCIDADE_NOME: TStringField
+      FieldName = 'CIDADE_NOME'
+      Required = True
+      Size = 50
+    end
+    object cdsCIDADESCIDADE_UF: TStringField
+      FieldName = 'CIDADE_UF'
+      Required = True
+      Size = 2
+    end
   end
   object dsCIDADES: TDataSource
     DataSet = cdsCIDADES
@@ -78,5 +108,13 @@ object dmConexao: TdmConexao
     DataSet = cdsCLIENTES
     Left = 48
     Top = 180
+  end
+  object qrConsulta: TSQLQuery
+    NoMetadata = True
+    SQLConnection = Conexao
+    DataSource = dsCLIENTES
+    Params = <>
+    Left = 192
+    Top = 112
   end
 end

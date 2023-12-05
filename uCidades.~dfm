@@ -1,8 +1,8 @@
 object frmCidades: TfrmCidades
-  Left = 699
-  Top = 291
+  Left = 745
+  Top = 266
   Width = 508
-  Height = 535
+  Height = 644
   Caption = 'Cidades'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,19 +17,20 @@ object frmCidades: TfrmCidades
   TextHeight = 13
   object pnGRIDCidades: TPanel
     Left = 0
-    Top = 154
+    Top = 155
     Width = 500
-    Height = 350
+    Height = 458
     Align = alBottom
     TabOrder = 0
     object dbGridCidades: TDBGrid
       Left = 8
       Top = 8
-      Width = 473
-      Height = 305
-      Font.Charset = DEFAULT_CHARSET
+      Width = 481
+      Height = 409
+      DataSource = dmConexao.dsCIDADES
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
+      Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
@@ -39,20 +40,40 @@ object frmCidades: TfrmCidades
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'CIDADE_ID'
+          Width = 65
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CIDADE_NOME'
+          Width = 295
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CIDADE_UF'
+          Width = 66
+          Visible = True
+        end>
     end
     object btnExcluir: TButton
-      Left = 407
-      Top = 317
+      Left = 415
+      Top = 427
       Width = 75
       Height = 25
       Caption = 'Excluir'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      OnClick = btnExcluirClick
     end
   end
   object pnCadastroCidades: TPanel
@@ -63,14 +84,14 @@ object frmCidades: TfrmCidades
     Align = alTop
     TabOrder = 1
     object lblCidade: TLabel
-      Left = 8
+      Left = 11
       Top = 18
-      Width = 65
-      Height = 24
+      Width = 54
+      Height = 20
       Caption = 'Cidade:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
+      Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
@@ -78,20 +99,20 @@ object frmCidades: TfrmCidades
     object lblUF: TLabel
       Left = 40
       Top = 75
-      Width = 30
-      Height = 24
+      Width = 26
+      Height = 20
       Caption = 'UF:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
+      Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
     end
     object edCidade: TEdit
-      Left = 88
+      Left = 72
       Top = 16
-      Width = 377
+      Width = 393
       Height = 28
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -102,9 +123,9 @@ object frmCidades: TfrmCidades
       TabOrder = 0
     end
     object edUF: TEdit
-      Left = 88
+      Left = 72
       Top = 72
-      Width = 57
+      Width = 49
       Height = 28
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -123,11 +144,11 @@ object frmCidades: TfrmCidades
       Caption = 'Cancelar'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
     end
     object btnVoltar: TButton
       Left = 408
@@ -137,11 +158,12 @@ object frmCidades: TfrmCidades
       Caption = 'Voltar'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
+      OnClick = btnVoltarClick
     end
     object btnCadastrar: TButton
       Left = 8
@@ -151,11 +173,11 @@ object frmCidades: TfrmCidades
       Caption = 'Cadastrar'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 2
       OnClick = btnCadastrarClick
     end
   end
