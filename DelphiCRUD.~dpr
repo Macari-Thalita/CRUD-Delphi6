@@ -5,7 +5,8 @@ uses
   uMenu in 'uMenu.pas' {frmMenu},
   uConexao in 'uConexao.pas' {dmConexao: TDataModule},
   uCidades in 'uCidades.pas' {frmCidades},
-  uClientes in 'uClientes.pas' {Form1};
+  uClientes in 'uClientes.pas' {frmClientes},
+  uFuncoes in 'uFuncoes.pas' {Form1};
 
 {$R *.res}
 
@@ -14,6 +15,7 @@ begin
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TdmConexao, dmConexao);
   Application.CreateForm(TfrmCidades, frmCidades);
+  Application.CreateForm(TfrmClientes, frmClientes);
   Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

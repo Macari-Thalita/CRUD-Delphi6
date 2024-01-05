@@ -1,11 +1,10 @@
 object dmConexao: TdmConexao
   OldCreateOrder = False
-  Left = 796
-  Top = 304
+  Left = 797
+  Top = 305
   Height = 341
   Width = 429
   object Conexao: TSQLConnection
-    Connected = True
     ConnectionName = 'Conexao'
     DriverName = 'Interbase'
     GetDriverFunc = 'getSQLDriverINTERBASE'
@@ -38,15 +37,18 @@ object dmConexao: TdmConexao
     Top = 16
     object dstCIDADESCIDADE_ID: TIntegerField
       FieldName = 'CIDADE_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object dstCIDADESCIDADE_NOME: TStringField
       FieldName = 'CIDADE_NOME'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 50
     end
     object dstCIDADESCIDADE_UF: TStringField
       FieldName = 'CIDADE_UF'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 2
     end
@@ -54,11 +56,11 @@ object dmConexao: TdmConexao
   object dspCIDADES: TDataSetProvider
     DataSet = dstCIDADES
     Constraints = True
+    UpdateMode = upWhereKeyOnly
     Left = 344
     Top = 71
   end
   object cdsCIDADES: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCIDADES'
@@ -66,15 +68,18 @@ object dmConexao: TdmConexao
     Top = 125
     object cdsCIDADESCIDADE_ID: TIntegerField
       FieldName = 'CIDADE_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCIDADESCIDADE_NOME: TStringField
       FieldName = 'CIDADE_NOME'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 50
     end
     object cdsCIDADESCIDADE_UF: TStringField
       FieldName = 'CIDADE_UF'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 2
     end
