@@ -9,12 +9,14 @@ uses
 type
   TfrmFuncoes = class(TForm)
   private
-    { Private declarations }
+//     FValorPesquisa: String;
   public
     procedure CadastrarCidade            (const ANome, AUF: string);
     procedure ExcluirCidade              (const ACidadeID: Integer);
     procedure CarregaDadosSelecionados   ();
     procedure AlterarCidade              (const ANome, AUF, ACidadeID: string);
+    procedure PesquisarCidade            (const FValorPesquisa: string);
+    procedure AtualizarCidades           ();
   end;
 
 var
@@ -48,11 +50,11 @@ end;
 procedure TfrmFuncoes.ExcluirCidade(const ACidadeID: Integer);
 begin
    try
-    if dmConexao.cdsCIDADES.Locate('CIDADE_ID', ACidadeID, []) then
-    begin
-       dmConexao.cdsCIDADES.Delete;
-       dmConexao.cdsCIDADES.ApplyUpdates(0);
-    end;
+      if dmConexao.cdsCIDADES.Locate('CIDADE_ID', ACidadeID, []) then
+      begin
+         dmConexao.cdsCIDADES.Delete;
+         dmConexao.cdsCIDADES.ApplyUpdates(0);
+      end;
    finally
       dmConexao.qrConsulta.Close;
    end;
@@ -60,32 +62,55 @@ end;
 
 procedure TfrmFuncoes.CarregaDadosSelecionados();
 begin
-  try
-    if not dmConexao.cdsCIDADES.IsEmpty then
-    begin
-       frmCidades.edCidade.Text       := dmConexao.cdsCIDADES.FieldByName('CIDADE_NOME').AsString;
-       frmCidades.edUF.Text           := dmConexao.cdsCIDADES.FieldByName('CIDADE_UF').AsString;
-       frmCidades.edCidadeID.Text     := dmConexao.cdsCIDADES.FieldByName('CIDADE_ID').AsString;
-    end;
-  finally
-     dmConexao.qrConsulta.Close;
-  end;
+   try
+      if not dmConexao.cdsCIDADES.IsEmpty then
+      begin
+         frmCidades.edCidade.Text       := dmConexao.cdsCIDADES.FieldByName('CIDADE_NOME').AsString;
+         frmCidades.edUF.Text           := dmConexao.cdsCIDADES.FieldByName('CIDADE_UF').AsString;
+         frmCidades.edCidadeID.Text     := dmConexao.cdsCIDADES.FieldByName('CIDADE_ID').AsString;
+      end;
+   finally
+      dmConexao.qrConsulta.Close;
+   end;
 end;
 
 procedure TfrmFuncoes.AlterarCidade(const ANome, AUF, ACidadeID: string);
 begin
-  try
-    if not dmConexao.cdsCIDADES.IsEmpty then
-    begin
-       dmConexao.cdsCIDADES.Edit;
-       dmConexao.cdsCIDADES.FieldByName('CIDADE_NOME').AsString := ANome;
-       dmConexao.cdsCIDADES.FieldByName('CIDADE_UF').AsString   := AUF;
-       dmConexao.cdsCIDADES.Post;
-       dmConexao.cdsCIDADES.ApplyUpdates(0);
-    end;
-  finally
-     dmConexao.qrConsulta.Close;
-  end;
+   try
+      if not dmConexao.cdsCIDADES.IsEmpty then
+      begin
+         dmConexao.cdsCIDADES.Edit;
+         dmConexao.cdsCIDADES.FieldByName('CIDADE_NOME').AsString := ANome;
+         dmConexao.cdsCIDADES.FieldByName('CIDADE_UF').AsString   := AUF;
+         dmConexao.cdsCIDADES.Post;
+         dmConexao.cdsCIDADES.ApplyUpdates(0);
+      end;
+   finally
+      dmConexao.qrConsulta.Close;
+   end;
+end;
+
+procedure TfrmFuncoes.PesquisarCidade(const FValorPesquisa: string);
+begin
+   try
+      if not dmConexao.cdsCIDADES.IsEmpty then
+      begin
+         dmConexao.cdsCIDADES.Filtered := False;
+         dmConexao.cdsCIDADES.Filter   := 'UPPER(CIDADE_NOME) LIKE ' + QuotedStr('%' + UpperCase(FValorPesquisa) + '%');
+         dmConexao.cdsCIDADES.Filtered := True;
+      end;
+   finally
+      dmConexao.qrConsulta.Close;
+   end;
+end;
+
+procedure TfrmFuncoes.AtualizarCidades();
+begin
+   try
+      dmConexao.cdsCIDADES.Filtered := False;
+   finally
+      dmConexao.qrConsulta.Close;
+   end;
 end;
 
 end.

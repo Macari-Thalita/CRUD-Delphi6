@@ -24,6 +24,7 @@ type
     btnRelatorio: TButton;
     lblID: TLabel;
     edCidadeID: TEdit;
+    btnAtualizar: TButton;
     procedure btnSalvarClick(Sender: TObject);
     procedure AvisoCadastroIncompleto();
     procedure CadastrarCidade();
@@ -37,15 +38,18 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnAtualizarClick(Sender: TObject);
   private
    FCadastroIncompleto: Boolean;
    FModoEdicao:         Boolean;
+   FResultadoPesquisar: String;
   public
     { Public declarations }
   end;
 
 var
-  frmCidades:          TfrmCidades;
+  frmCidades: TfrmCidades;
 
 implementation
 
@@ -207,6 +211,22 @@ end;
 procedure TfrmCidades.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    dmConexao.cdsCIDADES.Close;
+end;
+
+procedure TfrmCidades.btnPesquisarClick(Sender: TObject);
+begin
+   FResultadoPesquisar:= InputBox('Pesquisa', 'Informe a descrição:', '');
+
+   if (FResultadoPesquisar <> EmptyStr) then
+   begin
+      frmFuncoes.PesquisarCidade(FResultadoPesquisar);
+      dbGridCidades.Refresh;
+   end;
+end;
+
+procedure TfrmCidades.btnAtualizarClick(Sender: TObject);
+begin
+   frmFuncoes.AtualizarCidades();
 end;
 
 end.

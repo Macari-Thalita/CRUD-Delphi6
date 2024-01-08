@@ -5,7 +5,6 @@ object dmConexao: TdmConexao
   Height = 341
   Width = 429
   object Conexao: TSQLConnection
-    Connected = True
     ConnectionName = 'Conexao'
     DriverName = 'Interbase'
     GetDriverFunc = 'getSQLDriverINTERBASE'

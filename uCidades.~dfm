@@ -19,7 +19,7 @@ object frmCidades: TfrmCidades
   object pnCadastroCidades: TPanel
     Left = 0
     Top = 0
-    Width = 558
+    Width = 550
     Height = 401
     Align = alTop
     TabOrder = 0
@@ -194,6 +194,7 @@ object frmCidades: TfrmCidades
       Height = 25
       Caption = 'Pesquisar'
       TabOrder = 6
+      OnClick = btnPesquisarClick
     end
     object btnRelatorio: TButton
       Left = 456
@@ -216,6 +217,15 @@ object frmCidades: TfrmCidades
       Font.Style = []
       ParentFont = False
       TabOrder = 11
+    end
+    object btnAtualizar: TButton
+      Left = 8
+      Top = 368
+      Width = 75
+      Height = 25
+      Caption = 'Atualizar'
+      TabOrder = 12
+      OnClick = btnAtualizarClick
     end
   end
 end
